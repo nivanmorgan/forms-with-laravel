@@ -12,4 +12,27 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .vue()
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.copyDirectory(
+    'resources/css/assets', 'public/css/assets'
+);
+mix.autoload({
+    jquery: ['$', 'window.jQuery',"jQuery","window.$","jquery","window.jquery"],
+});
+
+
+mix.options({
+    // extractVueStyles: false,
+    processCssUrls: false,
+    postCss: [require('autoprefixer')],
+});
+
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.common.js',
+        }
+    }
+});
