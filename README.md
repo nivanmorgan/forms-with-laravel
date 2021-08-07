@@ -18,17 +18,17 @@ The project was setup on laravel 7 repo, to install
 5- no seeders, auth , or factories created. 
 
 
-![Alt text](2.png?raw=true "Title")
+![Alt text](storage/app/public/2.png?raw=true "Title")
 
-![Alt text](3.png?raw=true "Title")
+![Alt text](storage/app/public/3.png?raw=true "Title")
 
-![Alt text](4.png?raw=true "Title")
+![Alt text](storage/app/public/4.png?raw=true "Title")
 
-![Alt text](5.png?raw=true "Title")
+![Alt text](storage/app/public/5.png?raw=true "Title")
 
-![Alt text](6.png?raw=true "Title")
+![Alt text](storage/app/public/6.png?raw=true "Title")
 
-![Alt text](1.png?raw=true "Title")
+![Alt text](storage/app/public/1.png?raw=true "Title")
 
 
 
