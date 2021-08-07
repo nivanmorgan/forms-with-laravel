@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
+use App\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SellerController extends Controller
 {
@@ -35,6 +38,43 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         //
+        $seller = Seller::where([
+            "first"=>$request->first ,
+            "last"=>$request->last,
+            "portfolio_url" => $request->portfolio,
+            "has_store"=> $request->has_store,
+        ])->first();
+
+
+        $validator = Validator::make($request->all(),[
+            "first" => "required|max:255",
+            "last" => "required|max:255",
+            "portfolio_url"  => "required|max:255",
+            'category' => "required|max:255",
+
+        ]);
+
+        if ($validator->fails() || isset($seller)) {
+             return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $seller = Seller::firstOrCreate([
+            "first"=>$request->first ,
+             "last"=>$request->last,
+             "portfolio_url" => $request->portfolio,
+              "has_store" => $request->has_store,
+        ]);
+
+       $seller->profile()->create([
+           'category'=>$request->category ,
+           'store_url'=>$request->store_url ,
+           'quality_level'=>$request->quality_level ,
+           'experience_level'=>$request->experience_level ,
+           'business_level'=>$request->business_level ,
+       ]);
+
+
     }
 
     /**

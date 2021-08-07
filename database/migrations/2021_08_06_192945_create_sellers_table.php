@@ -17,16 +17,21 @@ class CreateSellersTable extends Migration
             $table->id();
             $table->string('first');
             $table->string('last');
+            $table->string('portfolio_url');
+            $table->boolean('has_store')->default(0);
+            $table->unique(array('first', 'last','portfolio_url','has_store'));
             $table->timestamps();
         });
 
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('seller_id')->index();
-            $table->foreign('seller_id')->references('id')->on('sellers')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('category', ["Graphics", "Fonts", "Templates", "Add-ons", "Photos", "Web Themes", "3D"]);
-            $table->text('portfolio_url');
+            $table->unsignedBigInteger('seller_id')->index();
+            $table->foreign('seller_id')->references('id')->on('sellers');
+            $table->enum('category', ["graphics", "fonts", "templates", "add-ons", "photos", "web themes", "3d"]);
             $table->text('store_url');
+            $table->text('quality_level');
+            $table->text('experience_level');
+            $table->text('business_level');
             $table->timestamps();
         });
 

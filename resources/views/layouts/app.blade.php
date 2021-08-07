@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Seller Form') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,19 +18,23 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-{{--    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">--}}
 
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            ]) !!};
+
+    </script>
 </head>
-<body class=" bg-image">
+<body class="bg-image">
     <div id="app" class="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="logo-container">
-                <a class="navbar-brand" href="{{ url('/') }}" title=" {{ config('app.name', 'Creative Market') }}" >
+                <a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'Creative Market') }}" >
                 </a>
             </div>
         </nav>
-
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>

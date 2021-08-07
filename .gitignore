@@ -23,3 +23,6 @@ Homestead.json
 .phpunit.result.cache
 .DS_store
 .idea/*
+/public/css
+public/js
+
