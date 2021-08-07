@@ -32,3 +32,4 @@ The project was setup on laravel 7 repo, to install
 
 
 
+Had I more time I would have created a vuex store to store my states that are  messy on frontend. Created more alerts for issues from backend. Maybe separated my form steps to more components.
