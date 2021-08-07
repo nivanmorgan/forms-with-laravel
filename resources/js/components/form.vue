@@ -175,7 +175,7 @@ export default {
       businessOptions:[
         { value: null, text: 'Select Answer' },
         { value: '4', text: 'I have an extensive background in business and/or marketing'},
-        { value: '4', text: 'I\'m familiar with some skills and some techniques, but I am not sure how to apply them when selling my creative work'},
+        { value: '3', text: 'I\'m familiar with some skills and some techniques, but I am not sure how to apply them when selling my creative work'},
         { value: '2', text: 'I\'m vaguely aware of basic business & marketing concepts'},
         { value: '1', text: 'I\'m  not interested in understanding business & marketing'}
       ],
@@ -183,7 +183,7 @@ export default {
         { value: null, text: 'Select Answer' },
         { value: '5', text: 'I sell on multiple marketplaces and through my own website'},
         { value: '4', text: 'I have experience selling only on my own website'},
-        { value: '4', text: 'I have experience selling through multiple marketplaces'},
+        { value: '3', text: 'I have experience selling through multiple marketplaces'},
         { value: '2', text: 'I have experience selling through one online marketplace'},
         { value: '1', text: 'I am new to selling creative products online'}
       ],
