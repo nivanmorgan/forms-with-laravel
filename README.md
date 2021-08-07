@@ -17,7 +17,6 @@ The project was setup on laravel 7 repo, to install
 4- compile assets with npm run dev
 5- no seeders, auth , or factories created. 
 
-![Alt text](1.png?raw=true "Title")
 
 ![Alt text](2.png?raw=true "Title")
 
@@ -28,5 +27,8 @@ The project was setup on laravel 7 repo, to install
 ![Alt text](5.png?raw=true "Title")
 
 ![Alt text](6.png?raw=true "Title")
+
+![Alt text](1.png?raw=true "Title")
+
 
 
