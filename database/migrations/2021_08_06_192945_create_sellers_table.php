@@ -28,10 +28,10 @@ class CreateSellersTable extends Migration
             $table->unsignedBigInteger('seller_id')->index();
             $table->foreign('seller_id')->references('id')->on('sellers');
             $table->enum('category', ["graphics", "fonts", "templates", "add-ons", "photos", "web themes", "3d"]);
-            $table->text('store_url');
-            $table->text('quality_level');
-            $table->text('experience_level');
-            $table->text('business_level');
+            $table->text('store_url')->nullable()->default(NULL);
+            $table->text('quality_level')->default(0);;
+            $table->text('experience_level')->default(0);;
+            $table->text('business_level')->default(0);;
             $table->timestamps();
         });
 

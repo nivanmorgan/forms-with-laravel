@@ -9,7 +9,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                
+
                 <forms></forms>
             </div>
         </div>
