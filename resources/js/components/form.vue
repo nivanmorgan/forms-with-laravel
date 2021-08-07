@@ -79,18 +79,18 @@
              id="checkbox"
              v-model="confirmed"
              name="checkbox-1"
-             value="link confirmed"
-             unchecked-value="not confirmed"
+             value="1"
+             unchecked-value="0"
              :state="checkboxState"
              required>
            Yes, I confirm that the content submitted is authored by me.
          </b-form-checkbox>
          </b-form-group>
-         <b-form-group label="Do you already have an online store?" v-slot="{ ariaDescribedby }" :state="radioState">
-           <b-form-radio v-model="has_store" :aria-describedby="ariaDescribedby" name="has_store" value="1">Yes</b-form-radio>
-           <b-form-radio v-model="has_store" :aria-describedby="ariaDescribedby" name="has_store" value="0">No</b-form-radio>
+         <b-form-group label="Do you already have an online store?" v-slot="{ ariaDescribedby }" :state="radioState" required  invalid-feedback="This field is required">
+           <b-form-radio v-model="radio" :aria-describedby="ariaDescribedby" name="radio" value="Yes"  required>Yes</b-form-radio>
+           <b-form-radio v-model="radio" :aria-describedby="ariaDescribedby" name="radio" value="No"  required>No</b-form-radio>
          </b-form-group>
-         <b-form-group label="Online stores I sell on today" v-if="has_store==='1'">
+         <b-form-group label="Online stores I sell on today" v-if="radio==='Yes'">
              <b-form-textarea
                id="textarea"
                v-model="store"
@@ -169,7 +169,7 @@ export default {
       experience: null,
       business: null,
       store:'',
-      has_store:null,
+      radio:null,
       confirmed: false,
       completed: false,
       businessOptions:[
@@ -199,10 +199,10 @@ export default {
         { value: null, text: 'Select Category' },
         { value: 'graphics', text: 'Graphics' },
         { value: 'fonts', text: 'Fonts' },
-        { value: 'templates', text: 'templates' },
-        { value: 'add-ons', text: 'add-ons' },
-        { value: 'photos', text: 'photos' },
-        { value: 'web themes', text: 'web themes' },
+        { value: 'templates', text: 'Templates' },
+        { value: 'add-ons', text: 'Add-ons' },
+        { value: 'photos', text: 'Photos' },
+        { value: 'web themes', text: 'Web themes' },
         { value: '3d', text: '3D' },
       ],
       submittedData: [],
@@ -217,21 +217,22 @@ export default {
     },
     step1Validity() {
       let valid = 0
-      if (this.first&&this.last&&this.portfolio&&this.category) {
-        valid=true
+      if (this.first&&this.last&&this.portfolio &&this.category&&this.radio&&this.confirmed) {
+        valid = true
       } else {
         this.first?this.firstState=true:this.firstState=false
         this.last?this.lastState=true:this.lastState=false
         this.category?this.categoryState=true:this.categoryState=false
-        this.has_store?this.radioState=true:this.radioState=false
+        this.portfolio?this.portfolioState=true:this.portfolioState=false
+        this.radio?this.radioState=true:this.radioState=false
         this.confirmed?this.checkboxState=true:this.checkboxState=false
-        valid=false
+        valid = false;
       }
       return valid;
     },
     step2Validity() {
       let valid = 0
-      if(this.quality&&this.experience&&this.last) {
+      if(this.quality&&this.experience&&this.business) {
         valid=true
       } else {
         this.quality?this.qualityState=true:this.qualityState=false
@@ -250,18 +251,13 @@ export default {
       this.current_step = 1;
     },
     checkStep1Validity() {
-      const valid =  this.step1Validity
-      return valid
+      return this.step1Validity
     },
     checkStep2Validity() {
-      const valid = this.step2Validity
-      return valid
+      return this.step2Validity
     },
     checkFormValidity() {
-      const valid = this.$refs.form.checkValidity()
-      // this.firstState = valid
-      // this.lastState = valid
-      return valid
+      return this.step1Validity && this.step2Validity
     },
     handleSubmit() {
       // Exit when the form isn't valid
@@ -290,7 +286,7 @@ export default {
         first: this.first,
         last: this.last,
         portfolio: this.portfolio,
-        has_store: this.portfolio,
+        has_store: this.radio==='Yes',
         store_url: this.store,
         category: this.category,
         quality_level: this.quality,

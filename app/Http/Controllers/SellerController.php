@@ -44,26 +44,33 @@ class SellerController extends Controller
             "portfolio_url" => $request->portfolio,
             "has_store"=> $request->has_store,
         ])->first();
+        if(isset($seller)) {
+            return redirect()->back();
+        }
 
 
         $validator = Validator::make($request->all(),[
             "first" => "required|max:255",
             "last" => "required|max:255",
-            "portfolio_url"  => "required|max:255",
-            'category' => "required|max:255",
-
+            "portfolio"  => "required|max:255",
         ]);
 
-        if ($validator->fails() || isset($seller)) {
-             return redirect()->back()
+
+        if ($validator->fails()) {
+            \Session::flash('error_message', 'Could not be saved.');
+
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
+
+
+
         $seller = Seller::firstOrCreate([
             "first"=>$request->first ,
              "last"=>$request->last,
              "portfolio_url" => $request->portfolio,
-              "has_store" => $request->has_store,
+             "has_store" => $request->has_store,
         ]);
 
        $seller->profile()->create([
@@ -73,7 +80,6 @@ class SellerController extends Controller
            'experience_level'=>$request->experience_level ,
            'business_level'=>$request->business_level ,
        ]);
-
 
     }
 
